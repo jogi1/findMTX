@@ -1,0 +1,7 @@
+# Fill out the fields don't forget the "
+AccountName = ""
+Email = ""
+Password = ""
+# Add any leagues you want ie. "Standard" or "Hardcore" etc
+StashLeagues = ["Perandus", "Perandus Hardcore"]
+DelayTime = 2
