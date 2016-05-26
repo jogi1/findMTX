@@ -2,6 +2,7 @@
 AccountName = ""
 Email = ""
 Password = ""
+SessionId = ""
 # Add any leagues you want ie. "Standard" or "Hardcore" etc
 StashLeagues = ["Perandus", "Perandus Hardcore"]
 DelayTime = 2

@@ -16,6 +16,7 @@ type Config struct {
 	AccountName string
 	Email       string
 	Password    string
+	SessionId   string
 	StashLeagues []string
 	DelayTime time.Duration
 }
@@ -48,12 +49,14 @@ func loadConfig() (config Config, err error) {
 		return conf, errors.New("need an AccountName")
 	}
 
-	if len(conf.Email) == 0 {
-		return conf, errors.New("need an Email")
-	}
+	if len(conf.SessionId) == 0 {
+		if len(conf.Email) == 0 {
+			return conf, errors.New("need Email/Password if no SessionId is provided")
+		}
 
-	if len(conf.Password) == 0 {
-		return conf, errors.New("need an Password")
+		if len(conf.Password) == 0 {
+			return conf, errors.New("need Email/Password if no SessionId is provided")
+		}
 	}
 	return conf, nil
 }
@@ -189,7 +192,9 @@ func main() {
 	}
 
 	p := new(poe.Poe)
-	err = p.Login(conf.AccountName, conf.Email, conf.Password)
+	conf.Email = ""
+	conf.Password = ""
+	err = p.Login(conf.AccountName, conf.Email, conf.Password, conf.SessionId)
 	if err != nil {
 		displayStartupError(err)
 		return
